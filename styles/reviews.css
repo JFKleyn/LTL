@@ -1,0 +1,162 @@
+/* =========================
+   REVIEWS SLIDER (FIXED)
+   - Mobile: card 300w x 320h, NO peeking
+   - Responsive: adjust via variables in media queries
+   - Arrows: visible + centered + not clipped
+   ========================= */
+
+.review-container{
+  background: #E9FEDD;
+  padding: 30px 0 40px;
+}
+
+/* You can keep your header styles separate */
+
+/* ===== Slider variables ===== */
+.reviews{
+  --cardW: 300px;
+  --cardH: 320px;
+  --gap: 16px;
+  --arrowSize: 38px;
+
+  position: relative;
+
+  /* IMPORTANT: viewport is exactly card width -> no peeking */
+  width: var(--cardW);
+  margin: 18px auto 30px;
+
+}
+
+/* Only the viewport clips */
+.viewport{
+  width: 100%;
+  overflow: hidden;
+  border-radius: 26px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Track slides in px */
+.track{
+  display: flex;
+  gap: var(--gap);
+  transition: transform 350ms ease;
+  will-change: transform;
+  transform: translateX(0px);
+}
+
+/* Card is fixed-size on mobile */
+.card{
+  flex: 0 0 auto;
+  width: var(--cardW);
+  height: var(--cardH);
+  box-sizing: border-box;
+
+  background: #fff;
+  border-radius: 26px;
+  padding: 22px 22px 26px;
+}
+
+/* Text styling (tweak as needed) */
+.card h4{ margin: 0 0 6px; font-size: 14px; font-weight: 700; }
+.muted{ margin: 0; font-size: 12px; opacity: 0.75; }
+.stars{ margin: 10px 0 14px; font-size: 16px; letter-spacing: 3px; color: #FFCC00;}
+.quote{ margin: 0 0 14px; font-size: 13px; font-weight: 500; }
+.body{ margin: 0; font-size: 12.5px; line-height: 1.55; opacity: 0.9; }
+
+/* ===== Arrows (fixed) ===== */
+/* FIXED ARROWS */
+
+.nav {
+  position: absolute;
+  top: 140px;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.15);
+
+  background: #ffffff;
+  color: #666;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 1;
+}
+
+.reviews button svg{
+  height: 14px;
+  width: 10px;
+}
+
+
+/* Position: slightly outside card */
+.prev {
+  left: -40px;
+}
+
+.prev svg{
+  margin-left: -2px;
+}
+
+.next {
+  right: -40px;
+}
+
+.next svg{
+  margin-left: 2px;
+}
+
+.nav:hover {
+  background: #f5f5f5;
+  color: #333;
+}
+
+.nav:disabled{ opacity: 0; cursor: not-allowed; }
+
+/* ===== Dots (pill style) ===== */
+.dots{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+  
+}
+
+.dots button{
+  height: 12px;
+  width: 12px;
+  border-radius: 999px;
+  border: none;
+  background: rgba(0,0,0,0.12);
+  cursor: pointer;
+  transition: all 180ms ease;
+  padding: 0;
+  
+}
+
+.dots button.active{
+  width: 24px;
+  background:#1E5772;
+}
+
+.review-footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.review-footer svg{
+  height: 30px;
+  width: 198px;
+}
+
+.leave-review{
+  padding-right: 22px;
+}
+

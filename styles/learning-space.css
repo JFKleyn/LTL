@@ -1,0 +1,10 @@
+
+.learning-space{
+  padding-bottom: 80px;
+}
+
+.space{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
