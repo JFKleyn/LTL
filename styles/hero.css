@@ -27,7 +27,7 @@ h1{
 }
 
 .hero-container p{
-  width: 300px;
+  width: 340px;
   text-align: center;
   margin-top: 30px;
   margin-bottom: 40px ;
@@ -63,4 +63,5 @@ button svg{
 
 .alternate svg{
   fill: #F66F61;
+
 }
