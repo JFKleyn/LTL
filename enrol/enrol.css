@@ -1,0 +1,82 @@
+
+
+.enrol-section{
+  margin-top: 80px;
+  background: linear-gradient(90deg, #A8CAEB, #FDFCD7);
+  padding: 40px 20px 80px 20px;
+}
+
+.formenrol-container{
+  border: 2px solid #1E5772;
+  border-radius: 50px;
+  padding: 20px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.177);
+}
+
+.field{
+  display: grid;
+  gap: 8px;
+  max-width: 320px;
+  font-family: system-ui, sans-serif;
+}
+
+.field label{
+  color: #1f5f78;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.input-wrap{
+  position: relative;
+}
+
+.input-wrap input{
+  width: 100%;
+  height: 44px;
+  padding: 0 44px 0 12px; /* room for icon on right */
+  border: 2px solid #d9d9d9;
+  border-radius: 3px;
+  outline: none;
+  font-size: 16px;
+  background: #fff;
+}
+
+.input-wrap input:focus{
+  border-color: #1f5f78;
+}
+
+.icon-btn{
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: #1f5f78;
+  padding: 0;
+  cursor: pointer;
+}
+
+.icon-btn svg{
+  width: 22px;
+  height: 22px;
+}
+
+/* Hide default calendar icon (Chrome, Edge, Safari) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+}
+
+/* Remove extra inner spacing */
+input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+}
