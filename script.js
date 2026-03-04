@@ -361,3 +361,82 @@ document.querySelectorAll(".service").forEach(service => {
 
   updateState();
 });
+
+// --------------------------------------------------------------------------------------------------------------------------
+// Form validation rules
+
+const enrolForm = document.querySelector("#enrol-form");
+
+if (enrolForm) {
+
+  enrolForm.addEventListener("submit", function(e){
+
+    // At least one day must be selected
+    const daysSelected = document.querySelectorAll('input[name="days"]:checked');
+
+    if(daysSelected.length === 0){
+      alert("Please select at least one day of the week.");
+      e.preventDefault();
+      return;
+    }
+
+    // At least one service must be selected
+    const servicesSelected = document.querySelectorAll('.service-toggle:checked');
+
+    if(servicesSelected.length === 0){
+      alert("Please select at least one learning option.");
+      e.preventDefault();
+      return;
+    }
+
+    let valid = true;
+
+    servicesSelected.forEach(serviceToggle => {
+
+      const service = serviceToggle.closest(".service");
+
+      const from = service.querySelector(".time-from");
+      const to   = service.querySelector(".time-to-select");
+
+      // Ensure times selected
+      if(!from.value || !to.value){
+        alert("Please select a valid time range for each selected service.");
+        valid = false;
+        return;
+      }
+
+      // Tutoring requires at least one subject
+      if(service.dataset.service === "tutoring"){
+
+        const subjects = service.querySelectorAll(".subject-cb:checked");
+
+        if(subjects.length === 0){
+          alert("Please select at least one tutoring subject.");
+          valid = false;
+          return;
+        }
+
+      }
+
+      // Homeschool requires curriculum
+      if(service.dataset.service === "homeschool"){
+
+        const curriculum = service.querySelector(".curriculum");
+
+        if(!curriculum.value.trim()){
+          alert("Please enter the homeschool curriculum.");
+          valid = false;
+          return;
+        }
+
+      }
+
+    });
+
+    if(!valid){
+      e.preventDefault();
+    }
+
+  });
+
+}
