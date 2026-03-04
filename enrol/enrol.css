@@ -25,6 +25,11 @@
   margin-bottom: 0px;
 }
 
+.service select:disabled,
+.service input:disabled{
+  opacity:0.5;
+}
+
 
 
 .formenrol-container{
