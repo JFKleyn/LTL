@@ -30,7 +30,7 @@
       <img src="../images/finalLogo.webp" alt="">
         <h1>Enrolment Form</h1>
         
-        <form class="enrolmentForm" action="/enrol/success" method="POST">
+        <form id="enrol-form" class="enrolmentForm">
 
           <div class="section-container">
             <div class="section-header">
@@ -90,7 +90,7 @@
 
             <div class="form-group">
               <label>Phone Number</label>
-              <input type="email" name="parent1number"  required />
+              <input type="text" name="parent1number"  required />
             </div>
 
             <div class="form-group">
@@ -102,17 +102,17 @@
 
             <div class="form-group">
               <label>Full Name</label>
-              <input type="text" name="parent2fullname"  required />
+              <input type="text" name="parent2fullname" />
             </div>
 
             <div class="form-group">
               <label>Email</label>
-              <input type="email" name="parent2email"  required />
+              <input type="email" name="parent2email" />
             </div>
 
             <div class="form-group">
               <label>Phone Number</label>
-              <input type="email" name="parent2number"  required />
+              <input type="text" name="parent2number" />
             </div>
 
             <div class="form-group">
@@ -371,17 +371,17 @@
 
             <div class="form-group">
               <label>1. Areas of Difficulty: (e.g. reading, writing, mathematics, attention, comprehension, organisation):</label>
-              <textarea name="parent2address"  rows="4" style="resize: none;"></textarea>
+              <textarea name="areasDifficulty"  rows="4" style="resize: none;"></textarea>
             </div>
 
             <div class="form-group">
               <label>2. Learning Strengths / Interests:</label>
-              <textarea name="parent2address"  rows="4" style="resize: none;"></textarea>
+              <textarea name="learningStrengths"  rows="4" style="resize: none;"></textarea>
             </div>
 
             <div class="form-group">
               <label>3. Previous Academic Support:</label>
-              <textarea name="parent2address"  rows="4" style="resize: none;"></textarea>
+              <textarea name="previousSupport"  rows="4" style="resize: none;"></textarea>
             </div>
 
             <div class="form-group">
@@ -515,6 +515,7 @@
       <p>Terms of Service</p>
     </div>
   </div>
+  <script src="enrol.js"></script>
   <script src="../script.js"></script>
 </body>
 </html>
