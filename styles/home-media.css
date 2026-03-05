@@ -41,8 +41,7 @@
   }
 
   .subjects{
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+    grid-template-columns: repeat(2, 280px);
   }
   
   .header p{
@@ -58,5 +57,87 @@
     width: 550px;
     height: 2180px;
   }
+
+  .footer{
+  grid-template-columns: 1fr 1fr 1fr;
+  }
   
+}
+
+@media (min-width: 1024px){
+  .hero-container p{
+    max-width: 750px;
+  }
+
+  #btn-bar{
+    display: none;
+  }
+
+  .hidden-a{
+  display: flex;
+  width: 400px;
+  justify-content: space-evenly;
+  }
+
+  .nav-container{
+    justify-content:center;
+    gap: 120px;
+  }
+
+  #enrol-btn3{
+    display: flex;
+    transition: all 0.5s ease;
+  }
+
+  #enrol-btn3:hover{
+    cursor: pointer;
+  background: #287295;
+
+  }
+
+  .buttons{
+    gap: 40px;
+  }
+
+  .subjects{
+    grid-template-columns: repeat(3, 280px);
+  }
+
+  .reasons{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .reviews{
+    --cardW: 540px;
+  }
+
+  .reviews p{
+    font-size: 18px;
+  }
+
+  .gallery{
+    width: 730px;
+    height: 2900px;
+  }
+
+  .gallery img{
+  width: 240px;
+  }
+  
+  .ready-options{
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ready-container .header{
+  width: 600px;
+  } 
+
+  .ready-container{
+    padding: 40px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 1440px){
+
 }
