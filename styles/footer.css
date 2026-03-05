@@ -65,15 +65,17 @@
 }
 
 .copy{
-  display: grid;
-  gap: 10px;
-  border-top: 0.2px solid #434141;
+  display: flex;
+  border-top: 0.1px solid #43414198;
   padding-top: 10px;
+  padding-bottom: 10px;
+  margin: 0 40px;
+
 }
 
 .copy p{
   color: #13485D;
-  font-size: 10px;
+  font-size: 12px;
   text-align: left;
 }
 
