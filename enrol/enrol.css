@@ -123,6 +123,11 @@ input{
   color: #1E5772;
 }
 
+.form-group textarea:focus{
+  outline: none;
+  border-color: #F66F61;
+}
+
 input:focus{
   outline: none;
   border-color: #F66F61;
