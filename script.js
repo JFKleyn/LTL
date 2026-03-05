@@ -263,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-    // --------------------------------------------------------------------------------------------------------------------------
+    //  --------------------------------------------------------------------------------------------------------------------------
 // Time selection dropdown
 
 
@@ -377,6 +377,7 @@ if (enrolForm) {
     if(daysSelected.length === 0){
       alert("Please select at least one day of the week.");
       e.preventDefault();
+      e.stopImmediatePropagation();
       return;
     }
 
@@ -386,6 +387,7 @@ if (enrolForm) {
     if(servicesSelected.length === 0){
       alert("Please select at least one learning option.");
       e.preventDefault();
+      e.stopImmediatePropagation();
       return;
     }
 
@@ -435,6 +437,7 @@ if (enrolForm) {
 
     if(!valid){
       e.preventDefault();
+      e.stopImmediatePropagation();
     }
 
   });
