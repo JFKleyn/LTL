@@ -248,6 +248,13 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "../contact/index.html";
     });
   }
+
+  const enrolBtn3 = document.getElementById("enrolBtn3");
+  if (enrolBtn3) {
+    enrolBtn3.addEventListener("click", () => {
+      window.location.href = "enrol/index.html";
+    });
+  }
 });
 
 
