@@ -1,0 +1,29 @@
+@media (min-width: 768px) {
+  .heading-section img{
+    max-width: 450px;
+  }
+
+  .writing{
+    max-width: 450px;
+  }
+}
+
+@media (min-width: 1024px){
+  .heading-section{
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  }
+  .heading-section h1{
+  font-size: 60px;
+  }
+
+  .about-main p{
+    max-width: 1120px;
+  }
+}
+
+@media (min-width: 1440px){
+  .heading-section{
+  gap: 120px;
+  }
+}
