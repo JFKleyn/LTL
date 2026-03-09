@@ -30,6 +30,10 @@
   justify-content: center;
 }
 
+.heading-section img{
+  margin: 0 auto;
+}
+
 .writing{
   display: flex;
   flex-direction: column;
@@ -76,6 +80,8 @@
 
 .about-main p {
   line-height:200%;
+  width: 100%;
+  max-width: 900px;
 }
 
 .writing-blue p{
@@ -158,4 +164,5 @@ border: none;
   cursor: pointer;
   background-color: #287295;
 }
+
 
