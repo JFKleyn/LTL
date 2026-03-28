@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <button type="button" id="back-btn">Back</button>
       </div>
     `;
-
+    
     const backBtn = document.getElementById("back-btn");
 
     if (backBtn) {
