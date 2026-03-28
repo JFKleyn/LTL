@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "resend": "^4.2.0"
+    "resend": "^4.2.0" 
   }
 }
