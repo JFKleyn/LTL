@@ -19,14 +19,13 @@ export async function onRequestPost(context) {
     const resend = new Resend(env.RESEND_API_KEY);
 
     await resend.emails.send({
-      from: "LTL Private Tutoring <noreply@ltlprivatetutoring.co.za>",
-      to: ["johan@venturetechnologies.co"],
+      from: `LTL Private Tutoring <${env.FROM_EMAIL}>`,
+      to: [env.TO_EMAIL],
       replyTo: email,
       subject: "New Contact Form Submission",
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>First name:</strong> ${firstname}</p>
-        <p><strong>Last name:</strong> ${lastname}</p>
+        <p><strong>Name:</strong> ${firstname} ${lastname}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong><br>${message}</p>
       `,
