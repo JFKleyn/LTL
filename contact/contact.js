@@ -1,30 +1,36 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contact-form");
+  const formContainer = document.getElementById("form-container");
   const statusEl = document.getElementById("form-status");
   const submitBtn = document.getElementById("submit-btn1");
-  const popup = document.getElementById("popup");
-  const closePopupBtn = document.getElementById("close-popup");
 
-  if (!form) return;
+  if (!form || !formContainer) return;
 
   const ENDPOINT = "/api/contact";
 
   function setStatus(msg, isError = false) {
     if (!statusEl) return;
     statusEl.textContent = msg;
-    statusEl.style.color = isError ? "crimson" : "green";
+    statusEl.style.color = isError ? "crimson" : "#1E5772";
   }
 
-  function openPopup() {
-    if (popup) popup.style.display = "block";
-  }
+  function showSuccessCard() {
+    formContainer.innerHTML = `
+      <div class="success-container">
+        <img src="../images/IMG_0222.webp" alt="LTL Private Tutoring logo">
+        <h1>Thank you for contacting us</h1>
+        <p>We will be in contact with you as soon as possible.</p>
+        <button type="button" id="back-btn">Back</button>
+      </div>
+    `;
 
-  function closePopup() {
-    if (popup) popup.style.display = "none";
-  }
+    const backBtn = document.getElementById("back-btn");
 
-  if (closePopupBtn) {
-    closePopupBtn.addEventListener("click", closePopup);
+    if (backBtn) {
+      backBtn.addEventListener("click", () => {
+        window.location.reload();
+      });
+    }
   }
 
   form.addEventListener("submit", async (e) => {
@@ -65,9 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      setStatus("Message sent successfully!");
-      form.reset();
-      openPopup();
+      showSuccessCard();
     } catch (err) {
       setStatus(`Network error: ${err?.message || err}`, true);
     } finally {
