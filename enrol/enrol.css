@@ -1,3 +1,5 @@
+
+
 .enrol-section{
   margin-top: 80px;
   background: linear-gradient(90deg, #A8CAEB, #FDFCD7);
@@ -18,18 +20,21 @@
   margin-bottom: 10px;
 }
 
+/* Remove gap after second-last child */
 .enrolmentForm > *:nth-last-child(2){
   margin-bottom: 0px;
 }
 
 .service select:disabled,
 .service input:disabled{
-  opacity: 0.5;
+  opacity:0.5;
 }
 
 .enrolmentForm span{
   color: #1E5772;
 }
+
+
 
 .formenrol-container{
   border: 2px solid #1E5772;
@@ -42,13 +47,6 @@
   background-color: rgba(255, 255, 255, 0.177);
   margin: auto;
   max-width: 750px;
-}
-
-.formenrol-container > img{
-  max-width: 220px;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
 }
 
 .section-container{
@@ -71,6 +69,7 @@
 span{
   font-size: 20px;
 }
+
 
 label{
   font-size: 24px;
@@ -103,24 +102,24 @@ input{
   background-color: #f7f7f7;
   height: 40px;
   width: 100%;
-  border: 1px solid #CDCDCD;
+  border:1px solid #CDCDCD;
   border-radius: 8px;
   padding: 10px;
   transition: all 0.2s ease;
   color: #1E5772;
   font-size: 20px;
-  box-sizing: border-box;
 }
 
 .form-group{
   text-align: left;
 }
 
-.form-group textarea{
+.form-group textarea {
   width: 100%;
   padding: 10px;
   font-size: 20px;
-  border: 1px solid #CDCDCD;
+  border-radius: 2px;
+  border:1px solid #CDCDCD;
   resize: none;
   margin-top: 10px;
   background-color: #f7f7f7;
@@ -151,6 +150,7 @@ input:focus{
   position: relative;
 }
 
+
 .input-wrap input:focus{
   border-color: #F66F61;
 }
@@ -169,7 +169,6 @@ input:focus{
   color: #1f5f78;
   padding: 0;
   cursor: pointer;
-  box-shadow: none;
 }
 
 .icon-btn svg{
@@ -177,18 +176,38 @@ input:focus{
   height: 22px;
 }
 
+/* Hide default calendar icon (Chrome, Edge, Safari) */
 input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   display: none;
 }
 
+/* Remove extra inner spacing */
 input[type="date"]::-webkit-inner-spin-button {
   display: none;
 }
 
 .day-picker{
   display: grid;
-  width: 260px;
+
+  width: 260px; /* adjust */
+}
+
+.day-option{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  user-select: none;
+  font-size: 28px; /* match your font */
+  line-height: 1;
+  position: relative;
+}
+
+.day-option input{
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .day-option{
@@ -199,14 +218,10 @@ input[type="date"]::-webkit-inner-spin-button {
   user-select: none;
 }
 
-.day-option input{
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
 
+/* selected */
 .day-option input:checked + .dot{
-  background: #1f5f78;
+  background: #1f5f78; /* theme colour */
 }
 
 .time-option{
@@ -216,55 +231,44 @@ input[type="date"]::-webkit-inner-spin-button {
   align-items: start;
 }
 
+/* Dot checkbox wrapper */
 .dot-option{
   position: relative;
   cursor: pointer;
 }
 
+/* Hide checkbox */
 .dot-option input{
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
+/* Dot look */
 .dot{
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  border: 2px solid #9ca3af;
-  background: transparent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #cfcfe0;
+  display: block;
+  margin-top: 6px;
 }
 
-.dot::after{
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #000;
-  opacity: 0;
-  transition: opacity 0.15s ease;
+/* Selected */
+.dot-option input:checked + .dot{
+  background: #1f5f78;
 }
 
-input:checked + .dot{
-  border-color: #000;
+/* Layout */
+
+.time-title{
+  font-size: 18px;
+  line-height: 1.2;
+  margin-bottom: 8px;
 }
 
-input:checked + .dot::after{
-  opacity: 1;
-}
-
-.dot.small{
-  width: 20px;
-  height: 20px;
-  margin-top: 0;
-}
-
-.service-label{
-  margin: 10px 0 8px;
+.time-label{
+  margin-bottom: 8px;
 }
 
 .time-grid{
@@ -282,13 +286,10 @@ input:checked + .dot::after{
 select{
   height: 34px;
   width: 110px;
+  border: 2px solid #d9d9d9;
+  border-radius: 2px;
   padding: 0 10px;
-  background-color: #f7f7f7;
-  border: 1px solid #CDCDCD;
-  border-radius: 8px;
-  transition: all 0.2s ease;
-  color: #868686;
-  font-size: 20px;
+  background: #fff;
 }
 
 .time-hint{
@@ -309,7 +310,6 @@ button{
   font-size: 24px;
   box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.15);
   border: none;
-  cursor: pointer;
 }
 
 .services{
@@ -317,6 +317,7 @@ button{
   gap: 32px;
 }
 
+/* option row */
 .service{
   display: grid;
   grid-template-columns: 26px 1fr;
@@ -324,12 +325,92 @@ button{
   align-items: start;
 }
 
+/* dot checkbox */
+.dot-option{
+  position: relative;
+  cursor: pointer;
+}
+.dot-option input{
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.dot{
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #9ca3af; /* light grey ring */
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+/* Inner circle (checked state) */
+.dot::after{
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #000;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* When checked */
+input:checked + .dot{
+  border-color: #000;
+}
+
+input:checked + .dot::after{
+  opacity: 1;
+}
+
+/* smaller dots for subjects */
+.dot.small{
+  width: 20px;
+  height: 20px;
+  margin-top: 0;
+}
+.service-label{
+  margin: 10px 0 8px;
+}
+
+/* time dropdowns */
+.time-grid{
+  display: grid;
+  grid-template-columns: 110px;
+  gap: 14px;
+  width: fit-content;
+}
+.time-to{
+  text-align: center;
+  font-size: 18px;
+}
+select{
+  height: 34px;
+  width: 110px;
+  border-radius: 2px;
+  padding: 0 10px;
+  background-color: #f7f7f7;
+  border:1px solid #CDCDCD;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  color: #868686;
+  font-size: 20px;
+}
+.time-hint{
+  margin-top: 10px;
+  font-size: 13px;
+  color: #334155;
+}
+
+/* subjects list */
 .subjectss{
   display: grid;
   gap: 10px;
   grid-template-columns: 1fr;
 }
-
 .subject{
   display: grid;
   grid-template-columns: 24px 1fr;
@@ -339,7 +420,6 @@ button{
   user-select: none;
   position: relative;
 }
-
 .subject input{
   display: none;
   position: absolute;
@@ -347,9 +427,13 @@ button{
   pointer-events: none;
 }
 
+/* dot fill for subject when checked */
 .subject input:checked + .dot{
   background: #1f5f78;
 }
+
+/* curriculum input */
+
 
 .consent-options{
   display: grid;
@@ -372,17 +456,69 @@ button{
   pointer-events: none;
 }
 
-#submit-btn2{
-  margin: 0 auto;
+/* Reuse your .dot styles */
+.consent-option input:checked + .dot{
+  background: #1f5f78;
 }
 
-#form-status{
-  min-height: 24px;
-  font-size: 18px;
-  color: #1E5772;
+.services{
+  text-align: left;
 }
 
-/* SUCCESS STATE */
+.service-title{
+  font-size: 24px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+  color: #1E3544;
+}
+
+ul{
+ padding-left: 32px;
+}
+
+.opt-desc{
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  text-align: left;
+}
+
+li{
+  font-size: 20px;
+  color: #1E3544;
+}
+
+.opt-desc-list{
+  border: 1px #000000 solid;
+}
+
+.opt-desc-desc{
+  border: 1px #000000 solid;
+  padding-left: 10px;
+}
+
+.option-container{
+  display: grid;
+  gap: 20px;
+}
+
+.optionss{
+  gap: 40px;
+}
+
+.consent-options{
+  margin-bottom: 20px;
+}
+
+.service-label{
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+
+/* =========================
+   SUCCESS CARD ONLY
+   ========================= */
+
 .success-container{
   display: flex;
   flex-direction: column;
@@ -416,69 +552,27 @@ button{
   margin: 0 auto;
 }
 
-/* MOBILE */
+/* success mobile only */
 @media (max-width: 768px){
-  .enrol-section{
-    padding: 30px 16px 60px 16px;
-  }
-
-  .formenrol-container{
-    padding: 24px 20px;
-    border-radius: 32px;
-    gap: 16px;
-  }
-
-  .formenrol-container > img,
   .success-container img{
     max-width: 170px;
   }
 
-  h1,
   .success-container h1{
     font-size: 30px;
     line-height: 1.2;
   }
 
-  .success-container p,
-  #form-status{
-    font-size: 16px;
-  }
-
-  label{
-    font-size: 20px;
-  }
-
-  input,
-  .form-group textarea,
-  select,
-  span{
+  .success-container p{
     font-size: 18px;
-  }
-
-  button{
-    width: 100%;
-    font-size: 20px;
-    padding: 12px 20px;
   }
 }
 
 @media (max-width: 480px){
-  .enrol-section{
-    margin-top: 60px;
-    padding: 24px 12px 50px 12px;
-  }
-
-  .formenrol-container{
-    padding: 20px 16px;
-    border-radius: 24px;
-  }
-
-  .formenrol-container > img,
   .success-container img{
     max-width: 140px;
   }
 
-  h1,
   .success-container h1{
     font-size: 26px;
   }
@@ -487,28 +581,7 @@ button{
     font-size: 16px;
   }
 
-  label{
-    font-size: 18px;
-  }
-
-  input,
-  .form-group textarea,
-  select,
-  span{
-    font-size: 16px;
-  }
-
-  .form-group textarea{
-    height: 110px;
-  }
-
-  button{
-    font-size: 18px;
-    padding: 12px 16px;
-  }
-
-  #form-status{
-    font-size: 15px;
-    min-height: 20px;
+  #back-btn{
+    width: 100%;
   }
 }
