@@ -132,11 +132,11 @@ export async function onRequestPost(context) {
     expect(response, [250]);
 
     // Main recipient
-    response = await send("RCPT TO:<johan@venturetechnologies.co>");
+    response = await send("RCPT TO:<johanfranskleyn@gmail.com>");
     expect(response, [250, 251]);
     
     // Venture archive / BCC
-    response = await send("RCPT TO:<website@venturetechnologies.co>");
+    response = await send("RCPT TO:<johan@venturetechnologies.co>");
     expect(response, [250, 251]);
     
     response = await send("DATA");
