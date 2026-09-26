@@ -1,25 +1,32 @@
-function escapeHtml(str = "") {
-  return String(str)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#39;");
+import { connect } from "cloudflare:sockets";
+
+function formatValue(value = "") {
+  if (value === null || value === undefined || value === "") {
+    return "Not provided";
+  }
+
+  return String(value);
 }
 
 function formatList(items = []) {
-  if (!items || !items.length) return "None selected";
-  return items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
-}
+  if (!Array.isArray(items) || !items.length) {
+    return "None selected";
+  }
 
-function formatValue(value = "") {
-  return value ? escapeHtml(value) : "Not provided";
+  return items.join(", ");
 }
 
 export async function onRequestPost(context) {
   const { request, env } = context;
 
+  let socket;
+  let writer;
+  let reader;
+
   try {
+    // ─────────────────────────────────────────────
+    // Read enrolment submission
+    // ─────────────────────────────────────────────
     const data = await request.json();
 
     const {
@@ -37,116 +44,293 @@ export async function onRequestPost(context) {
       tutoring,
       homeschool,
       therapy,
-      socialConsent
+      socialConsent,
     } = data;
 
     if (!childFullname || !parent1?.fullname || !parent1?.email) {
-      return new Response(
-        JSON.stringify({ error: "Missing required fields." }),
+      return json(
         {
-          status: 400,
-          headers: { "Content-Type": "application/json" }
-        }
+          success: false,
+          error: "Missing required fields.",
+        },
+        400,
       );
     }
 
-    const emailHtml = `
-      <h2>New Enrolment Submission</h2>
+    // Validate Parent / Guardian 1 email
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      <h3>Learner Details</h3>
-      <p><strong>Full Name:</strong> ${formatValue(childFullname)}</p>
-      <p><strong>Grade:</strong> ${formatValue(grade)}</p>
-      <p><strong>School:</strong> ${formatValue(school)}</p>
-      <p><strong>Birthday:</strong> ${formatValue(birthday)}</p>
-      <p><strong>Allergies:</strong> ${formatValue(allergies)}</p>
+    if (!emailPattern.test(parent1.email)) {
+      return json(
+        {
+          success: false,
+          error: "Please enter a valid parent/guardian email address.",
+        },
+        400,
+      );
+    }
 
-      <h3>Parent / Guardian 1</h3>
-      <p><strong>Full Name:</strong> ${formatValue(parent1?.fullname)}</p>
-      <p><strong>Email:</strong> ${formatValue(parent1?.email)}</p>
-      <p><strong>Phone Number:</strong> ${formatValue(parent1?.number)}</p>
-      <p><strong>Address:</strong> ${formatValue(parent1?.address)}</p>
+    // Prevent header injection
+    if (/[\r\n]/.test(parent1.email)) {
+      return json(
+        {
+          success: false,
+          error: "Invalid email address.",
+        },
+        400,
+      );
+    }
 
-      <h3>Parent / Guardian 2</h3>
-      <p><strong>Full Name:</strong> ${formatValue(parent2?.fullname)}</p>
-      <p><strong>Email:</strong> ${formatValue(parent2?.email)}</p>
-      <p><strong>Phone Number:</strong> ${formatValue(parent2?.number)}</p>
-      <p><strong>Address:</strong> ${formatValue(parent2?.address)}</p>
-
-      <h3>Selected Days</h3>
-      <ul>${formatList(days)}</ul>
-
-      <h3>Selected Services</h3>
-      <ul>${formatList(services)}</ul>
-
-      <h3>Tutoring Subjects</h3>
-      <ul>${formatList(tutoringSubjects)}</ul>
-
-      <h3>Homework Support</h3>
-      <p><strong>From:</strong> ${formatValue(homework?.timeFrom)}</p>
-      <p><strong>To:</strong> ${formatValue(homework?.timeTo)}</p>
-
-      <h3>Tutoring</h3>
-      <p><strong>From:</strong> ${formatValue(tutoring?.timeFrom)}</p>
-      <p><strong>To:</strong> ${formatValue(tutoring?.timeTo)}</p>
-
-      <h3>Homeschool Assistance</h3>
-      <p><strong>Curriculum:</strong> ${formatValue(homeschool?.curriculum)}</p>
-      <p><strong>From:</strong> ${formatValue(homeschool?.timeFrom)}</p>
-      <p><strong>To:</strong> ${formatValue(homeschool?.timeTo)}</p>
-
-      <h3>Therapy Support</h3>
-      <p><strong>From:</strong> ${formatValue(therapy?.timeFrom)}</p>
-      <p><strong>To:</strong> ${formatValue(therapy?.timeTo)}</p>
-
-      <h3>Social Media Consent</h3>
-      <p>${formatValue(socialConsent)}</p>
-    `;
-
-    const resendResponse = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${env.RESEND_API_KEY}`,
-        "Content-Type": "application/json"
+    // ─────────────────────────────────────────────
+    // Connect to Venture / Xneelo SMTP
+    // ─────────────────────────────────────────────
+    socket = connect(
+      {
+        hostname: env.SMTP_HOST,
+        port: 465,
       },
-      body: JSON.stringify({
-        from: `LTL Private Tutoring <${env.FROM_EMAIL}>`,
-        to: [env.TO_EMAIL],
-        reply_to: parent1.email,
-        subject: `New Enrolment Submission - ${childFullname}`,
-        html: emailHtml
-      })
-    });
+      {
+        secureTransport: "on",
+      },
+    );
 
-    const resendData = await resendResponse.json();
+    writer = socket.writable.getWriter();
+    reader = socket.readable.getReader();
 
-    if (!resendResponse.ok) {
-      return new Response(
-        JSON.stringify({
-          error: resendData.message || "Failed to send email"
-        }),
-        {
-          status: 500,
-          headers: { "Content-Type": "application/json" }
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
+
+    async function readResponse() {
+      let response = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+
+        if (done) break;
+
+        response += decoder.decode(value, { stream: true });
+
+        const lines = response.split("\r\n").filter(Boolean);
+        const lastLine = lines[lines.length - 1];
+
+        if (lastLine && /^\d{3} /.test(lastLine)) {
+          break;
         }
-      );
+      }
+
+      return response;
     }
 
-    return new Response(
-      JSON.stringify({ success: true }),
-      {
-        status: 200,
-        headers: { "Content-Type": "application/json" }
+    async function send(command) {
+      await writer.write(
+        encoder.encode(command + "\r\n"),
+      );
+
+      return await readResponse();
+    }
+
+    function expect(response, codes) {
+      const code = Number(response.slice(0, 3));
+
+      if (!codes.includes(code)) {
+        throw new Error(`SMTP error: ${response}`);
       }
+    }
+
+    // ─────────────────────────────────────────────
+    // SMTP authentication
+    // ─────────────────────────────────────────────
+    let response = await readResponse();
+    expect(response, [220]);
+
+    response = await send("EHLO venturetechnologies.co");
+    expect(response, [250]);
+
+    response = await send("AUTH LOGIN");
+    expect(response, [334]);
+
+    response = await send(btoa(env.SMTP_USER));
+    expect(response, [334]);
+
+    response = await send(btoa(env.SMTP_PASSWORD));
+    expect(response, [235]);
+
+    // ─────────────────────────────────────────────
+    // Addressing
+    // ─────────────────────────────────────────────
+    response = await send(
+      `MAIL FROM:<${env.SMTP_USER}>`,
     );
+    expect(response, [250]);
+
+    // TEST recipient
+    response = await send(
+      "RCPT TO:<johan@venturetechnologies.co>",
+    );
+    expect(response, [250, 251]);
+
+    // Venture archive / invisible BCC
+    response = await send(
+      "RCPT TO:<johan@venturetechnologies.co>",
+    );
+    expect(response, [250, 251]);
+
+    response = await send("DATA");
+    expect(response, [354]);
+
+    // ─────────────────────────────────────────────
+    // Build enrolment email
+    // ─────────────────────────────────────────────
+    const safeChildName = cleanHeader(childFullname);
+    const safeParentName = cleanHeader(parent1.fullname);
+    const safeParentEmail = cleanHeader(parent1.email);
+
+    const subject =
+      `New LTL Enrolment Submission - ${safeChildName}`;
+
+    const emailBody = [
+      `From: LTL Private Tutoring Website <${env.SMTP_USER}>`,
+      `To: Johan <johan@venturetechnologies.co>`,
+      `Reply-To: ${safeParentName} <${safeParentEmail}>`,
+      `Subject: ${subject}`,
+      "MIME-Version: 1.0",
+      'Content-Type: text/plain; charset="UTF-8"',
+      "",
+
+      "NEW LTL ENROLMENT SUBMISSION",
+      "========================================",
+      "",
+
+      "LEARNER DETAILS",
+      "----------------------------------------",
+      `Full Name: ${formatValue(childFullname)}`,
+      `Grade: ${formatValue(grade)}`,
+      `School: ${formatValue(school)}`,
+      `Birthday: ${formatValue(birthday)}`,
+      `Allergies: ${formatValue(allergies)}`,
+      "",
+
+      "PARENT / GUARDIAN 1",
+      "----------------------------------------",
+      `Full Name: ${formatValue(parent1?.fullname)}`,
+      `Email: ${formatValue(parent1?.email)}`,
+      `Phone Number: ${formatValue(parent1?.number)}`,
+      `Address: ${formatValue(parent1?.address)}`,
+      "",
+
+      "PARENT / GUARDIAN 2",
+      "----------------------------------------",
+      `Full Name: ${formatValue(parent2?.fullname)}`,
+      `Email: ${formatValue(parent2?.email)}`,
+      `Phone Number: ${formatValue(parent2?.number)}`,
+      `Address: ${formatValue(parent2?.address)}`,
+      "",
+
+      "SELECTED DAYS",
+      "----------------------------------------",
+      formatList(days),
+      "",
+
+      "SELECTED SERVICES",
+      "----------------------------------------",
+      formatList(services),
+      "",
+
+      "TUTORING SUBJECTS",
+      "----------------------------------------",
+      formatList(tutoringSubjects),
+      "",
+
+      "HOMEWORK SUPPORT",
+      "----------------------------------------",
+      `From: ${formatValue(homework?.timeFrom)}`,
+      `To: ${formatValue(homework?.timeTo)}`,
+      "",
+
+      "TUTORING",
+      "----------------------------------------",
+      `From: ${formatValue(tutoring?.timeFrom)}`,
+      `To: ${formatValue(tutoring?.timeTo)}`,
+      "",
+
+      "HOMESCHOOL ASSISTANCE",
+      "----------------------------------------",
+      `Curriculum: ${formatValue(homeschool?.curriculum)}`,
+      `From: ${formatValue(homeschool?.timeFrom)}`,
+      `To: ${formatValue(homeschool?.timeTo)}`,
+      "",
+
+      "THERAPY SUPPORT",
+      "----------------------------------------",
+      `From: ${formatValue(therapy?.timeFrom)}`,
+      `To: ${formatValue(therapy?.timeTo)}`,
+      "",
+
+      "SOCIAL MEDIA CONSENT",
+      "----------------------------------------",
+      formatValue(socialConsent),
+      "",
+
+      "========================================",
+      "Sent via the LTL Private Tutoring website",
+      "Email delivery powered by Venture Technologies",
+    ].join("\r\n");
+
+    // SMTP dot-stuffing
+    const smtpSafeBody = emailBody.replace(/^\./gm, "..");
+
+    await writer.write(
+      encoder.encode(smtpSafeBody + "\r\n.\r\n"),
+    );
+
+    response = await readResponse();
+    expect(response, [250]);
+
+    await writer.write(
+      encoder.encode("QUIT\r\n"),
+    );
+
+    try {
+      await writer.close();
+    } catch {
+      // SMTP transaction already completed successfully.
+    }
+
+    return json({
+      success: true,
+      message: "Enrolment submitted successfully.",
+    });
   } catch (error) {
-    return new Response(
-      JSON.stringify({
-        error: error.message || "Server error"
-      }),
+    console.error("LTL ENROLMENT SMTP ERROR:", error);
+
+    try {
+      if (writer) await writer.close();
+    } catch {
+      // Ignore cleanup errors.
+    }
+
+    return json(
       {
-        status: 500,
-        headers: { "Content-Type": "application/json" }
-      }
+        success: false,
+        error:
+          "We couldn't submit the enrolment. Please try again.",
+      },
+      500,
     );
   }
+}
+
+function cleanHeader(value) {
+  return String(value)
+    .replace(/[\r\n]/g, " ")
+    .trim();
+}
+
+function json(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
