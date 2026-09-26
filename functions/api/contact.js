@@ -131,9 +131,14 @@ export async function onRequestPost(context) {
     response = await send(`MAIL FROM:<${env.SMTP_USER}>`);
     expect(response, [250]);
 
+    // Main recipient
     response = await send("RCPT TO:<johan@venturetechnologies.co>");
     expect(response, [250, 251]);
-
+    
+    // Venture archive / BCC
+    response = await send("RCPT TO:<website@venturetechnologies.co>");
+    expect(response, [250, 251]);
+    
     response = await send("DATA");
     expect(response, [354]);
 
