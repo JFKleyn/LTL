@@ -1,48 +1,228 @@
-import { Resend } from "resend";
+import { connect } from "cloudflare:sockets";
 
 export async function onRequestPost(context) {
   const { request, env } = context;
 
+  let socket;
+  let writer;
+  let reader;
+
   try {
-    const { firstname, lastname, email, number, message } = await request.json();
+    // ─────────────────────────────────────────────
+    // Read form submission
+    // ─────────────────────────────────────────────
+    const body = await request.json();
+
+    const firstname = body.firstname?.trim();
+    const lastname = body.lastname?.trim();
+    const email = body.email?.trim();
+    const number = body.number?.trim();
+    const message = body.message?.trim();
 
     if (!firstname || !lastname || !email || !number || !message) {
-      return new Response(
-        JSON.stringify({ error: "Please fill in all fields." }),
+      return json(
         {
-          status: 400,
-          headers: { "Content-Type": "application/json" },
-        }
+          success: false,
+          error: "Please fill in all fields.",
+        },
+        400,
       );
     }
 
-    const resend = new Resend(env.RESEND_API_KEY);
+    // Basic server-side email validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    await resend.emails.send({
-      from: `LTL Private Tutoring <${env.FROM_EMAIL}>`,
-      to: [env.TO_EMAIL],
-      replyTo: email,
-      subject: "New Contact Form Submission",
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${firstname} ${lastname}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Number:</strong> ${number}</p>
-        <p><strong>Message:</strong><br>${message}</p>
-      `,
-    });
+    if (!emailPattern.test(email)) {
+      return json(
+        {
+          success: false,
+          error: "Please enter a valid email address.",
+        },
+        400,
+      );
+    }
 
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers: { "Content-Type": "application/json" },
+    // Prevent email header injection
+    if (/[\r\n]/.test(email)) {
+      return json(
+        {
+          success: false,
+          error: "Invalid email address.",
+        },
+        400,
+      );
+    }
+
+    // ─────────────────────────────────────────────
+    // Connect to Venture / Xneelo SMTP
+    // ─────────────────────────────────────────────
+    socket = connect(
+      {
+        hostname: env.SMTP_HOST,
+        port: 465,
+      },
+      {
+        secureTransport: "on",
+      },
+    );
+
+    writer = socket.writable.getWriter();
+    reader = socket.readable.getReader();
+
+    const encoder = new TextEncoder();
+    const decoder = new TextDecoder();
+
+    async function readResponse() {
+      let response = "";
+
+      while (true) {
+        const { value, done } = await reader.read();
+
+        if (done) break;
+
+        response += decoder.decode(value, { stream: true });
+
+        const lines = response.split("\r\n").filter(Boolean);
+        const lastLine = lines[lines.length - 1];
+
+        if (lastLine && /^\d{3} /.test(lastLine)) {
+          break;
+        }
+      }
+
+      return response;
+    }
+
+    async function send(command) {
+      await writer.write(encoder.encode(command + "\r\n"));
+      return await readResponse();
+    }
+
+    function expect(response, codes) {
+      const code = Number(response.slice(0, 3));
+
+      if (!codes.includes(code)) {
+        throw new Error(`SMTP error: ${response}`);
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    // SMTP authentication
+    // ─────────────────────────────────────────────
+    let response = await readResponse();
+    expect(response, [220]);
+
+    response = await send("EHLO venturetechnologies.co");
+    expect(response, [250]);
+
+    response = await send("AUTH LOGIN");
+    expect(response, [334]);
+
+    response = await send(btoa(env.SMTP_USER));
+    expect(response, [334]);
+
+    response = await send(btoa(env.SMTP_PASSWORD));
+    expect(response, [235]);
+
+    // ─────────────────────────────────────────────
+    // Addressing
+    // TESTING: Send only to Johan
+    // ─────────────────────────────────────────────
+    response = await send(`MAIL FROM:<${env.SMTP_USER}>`);
+    expect(response, [250]);
+
+    response = await send("RCPT TO:<johan@venturetechnologies.co>");
+    expect(response, [250, 251]);
+
+    response = await send("DATA");
+    expect(response, [354]);
+
+    // ─────────────────────────────────────────────
+    // Build email
+    // ─────────────────────────────────────────────
+    const safeFirstname = cleanHeader(firstname);
+    const safeLastname = cleanHeader(lastname);
+    const safeEmail = cleanHeader(email);
+
+    const subject =
+      `New LTL Contact Enquiry - ${safeFirstname} ${safeLastname}`;
+
+    const emailBody = [
+      `From: LTL Private Tutoring Website <${env.SMTP_USER}>`,
+      `To: Johan <johan@venturetechnologies.co>`,
+      `Reply-To: ${safeFirstname} ${safeLastname} <${safeEmail}>`,
+      `Subject: ${subject}`,
+      "MIME-Version: 1.0",
+      'Content-Type: text/plain; charset="UTF-8"',
+      "",
+      "NEW LTL WEBSITE ENQUIRY",
+      "========================================",
+      "",
+      `Name: ${firstname} ${lastname}`,
+      `Email: ${email}`,
+      `Number: ${number}`,
+      "",
+      "MESSAGE",
+      "----------------------------------------",
+      message,
+      "",
+      "========================================",
+      "Sent via the LTL Private Tutoring website",
+      "Email delivery powered by Venture Technologies",
+    ].join("\r\n");
+
+    // Dot-stuff lines beginning with a period for SMTP DATA
+    const smtpSafeBody = emailBody.replace(/^\./gm, "..");
+
+    await writer.write(
+      encoder.encode(smtpSafeBody + "\r\n.\r\n"),
+    );
+
+    response = await readResponse();
+    expect(response, [250]);
+
+    await writer.write(encoder.encode("QUIT\r\n"));
+
+    try {
+      await writer.close();
+    } catch {
+      // SMTP transaction already completed successfully.
+    }
+
+    return json({
+      success: true,
+      message: "Enquiry sent successfully.",
     });
   } catch (error) {
-    return new Response(
-      JSON.stringify({ error: error.message || "Server error" }),
+    console.error("LTL CONTACT FORM SMTP ERROR:", error);
+
+    try {
+      if (writer) await writer.close();
+    } catch {
+      // Ignore cleanup errors.
+    }
+
+    return json(
       {
-        status: 500,
-        headers: { "Content-Type": "application/json" },
-      }
+        success: false,
+        error: "We couldn't send your enquiry. Please try again.",
+      },
+      500,
     );
   }
+}
+
+function cleanHeader(value) {
+  return String(value)
+    .replace(/[\r\n]/g, " ")
+    .trim();
+}
+
+function json(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }
