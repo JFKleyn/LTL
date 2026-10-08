@@ -1,0 +1,88 @@
+.ltl-footer { position: relative; padding: 35px 0 24px; border-top: 1px solid var(--ltl-line); background: #f7f3e9; }
+.ltl-footer-welcome { display: flex; align-items: center; gap: 24px; padding-bottom: 32px; margin-bottom: 32px; border-bottom: 1px dashed #204f5e25; }
+.ltl-footer-welcome .ltl-hand { font-size: 1.7rem; line-height: 1.3; transform: rotate(-2deg); }
+.ltl-footer-welcome > svg { width: 125px; height: 40px; color: #cc9b59; flex-shrink: 0; }
+.ltl-footer-grid { display: grid; grid-template-columns: 1.1fr .7fr 1.1fr; gap: 60px; }
+.ltl-footer h3 { font-size: 1.15rem; margin-bottom: 24px; }
+.ltl-footer .ltl-brand { display: inline-block; }
+.ltl-footer .ltl-brand img { width: 150px; height: 68px; object-fit: contain; }
+.ltl-footer-brand > p { font-size: .95rem; margin-top: 18px; }
+.ltl-footer .ltl-socials { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.ltl-footer a.ltl-social-icon { display: inline-flex; align-items: center; justify-content: center; width: 46px; height: 46px; margin: 0; border: 1px solid #204f5e12; border-radius: 15px; color: var(--ltl-ink); background: #e1eeea; transition: transform .3s ease, box-shadow .3s ease, background .3s ease; }
+.ltl-social-icon svg { width: 23px; height: 23px; }
+.ltl-footer a.ltl-social-instagram { background: #f9e3dc; }
+.ltl-footer a.ltl-social-facebook { background: #e1e9f2; }
+.ltl-footer a.ltl-social-icon:hover { transform: translateY(-4px) rotate(-5deg); color: var(--ltl-ink); box-shadow: 0 8px 15px #204f5e12; }
+.ltl-footer-links a { display: flex; align-items: center; gap: 10px; width: fit-content; margin-bottom: 12px; font-size: .9rem; transition: color .25s ease; }
+.ltl-footer-links a span { color: var(--ltl-coral); opacity: 0; transform: translateX(-5px); transition: opacity .25s ease, transform .25s ease; }
+.ltl-footer-links a:hover, .ltl-footer-links a:focus-visible { color: var(--ltl-coral); }
+.ltl-footer-links a:hover span, .ltl-footer-links a:focus-visible span { opacity: 1; transform: translateX(0); }
+.ltl-footer-contact > a, .ltl-footer-address { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; font-size: .88rem; }
+.ltl-footer-contact > a span { min-width: 0; overflow-wrap: anywhere; }
+.ltl-footer-contact > a:hover { color: var(--ltl-coral); }
+.ltl-footer-contact svg { width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px; color: var(--ltl-coral); }
+.ltl-footer-address p { margin: 0; font-size: .88rem; }
+.ltl-copyright { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; font-size: .75rem; border-top: 1px solid var(--ltl-line); padding-top: 22px; margin-top: 42px; }
+.ltl-footer-signoff { font-family: 'Patrick Hand', cursive; font-size: 1.05rem; color: var(--ltl-ink); }
+.ltl-footer-signoff > span { margin-left: 6px; color: var(--ltl-coral); }
+@media(max-width:1000px) { .ltl-footer-grid { gap: 30px; } }
+@media(max-width:760px) {
+ .ltl-footer-grid { grid-template-columns: 1fr 1fr; gap: 35px; }
+ .ltl-footer-brand { grid-column: 1 / -1; }
+ .ltl-footer-welcome { gap: 12px; }
+ .ltl-footer-welcome .ltl-hand { font-size: 1.4rem; }
+ .ltl-footer-welcome > svg { width: 85px; }
+ .ltl-copyright { align-items: flex-start; flex-direction: column; }
+}
+@media(max-width:480px) {
+ .ltl-footer-grid { grid-template-columns: 1fr; gap: 30px; }
+ .ltl-footer h3 { margin-bottom: 18px; }
+ .ltl-footer-welcome { align-items: flex-start; }
+ .ltl-footer-welcome > svg { width: 55px; }
+}
+
+/* Contact rows: fixed icon column and consistent text alignment. */
+.ltl-footer .ltl-footer-contact > a,
+.ltl-footer .ltl-footer-contact > .ltl-footer-address {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  column-gap: 18px;
+  align-items: start;
+  margin-bottom: 18px;
+  line-height: 1.7;
+}
+.ltl-footer .ltl-footer-contact svg { width: 20px; height: 20px; margin-top: 2px; }
+.ltl-footer .ltl-footer-contact > a span,
+.ltl-footer .ltl-footer-address p { margin: 0; padding: 0; min-width: 0; }
+/* Bottom row: copyright, handwritten note, Venture credit. */
+.ltl-footer .ltl-copyright {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+}
+.ltl-footer-signoff { text-align: center; }
+.ltl-footer a.ltl-venture-credit {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 5px;
+  width: fit-content;
+  margin: 0;
+  font-size: .78rem;
+  color: var(--ltl-ink);
+  transition: color .25s ease;
+}
+.ltl-venture-credit strong { font-weight: 700; }
+.ltl-venture-credit > span { display: inline-block; margin-left: 3px; transition: transform .25s ease; }
+.ltl-footer a.ltl-venture-credit:hover { color: var(--ltl-coral); }
+.ltl-venture-credit:hover > span { transform: translate(2px, -2px); }
+@media (max-width: 1000px) {
+  .ltl-footer .ltl-copyright { grid-template-columns: 1fr auto; }
+  .ltl-footer-signoff { grid-column: 1 / -1; grid-row: 2; text-align: center; }
+}
+@media (max-width: 600px) {
+  .ltl-footer .ltl-copyright { grid-template-columns: 1fr; gap: 12px; text-align: center; }
+  .ltl-footer-signoff { grid-column: auto; grid-row: auto; }
+  .ltl-footer a.ltl-venture-credit { justify-self: center; }
+}

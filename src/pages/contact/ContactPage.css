@@ -1,0 +1,470 @@
+.ltl-contact {
+  background: var(--ltl-cream, #fffcf5);
+}
+.ltl-contact-layout {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: clamp(48px, 7vw, 110px);
+  padding-top: 88px;
+  padding-bottom: 110px;
+  align-items: start;
+}
+.ltl-contact-intro {
+  padding-top: 20px;
+}
+.ltl-contact h1 {
+  color: var(--ltl-ink);
+  font:
+    900 clamp(48px, 5.4vw, 78px)/1.08 "Nunito",
+    sans-serif;
+  letter-spacing: -0.045em;
+  margin: 28px 0;
+}
+.ltl-contact h1 span {
+  color: var(--ltl-coral);
+}
+.ltl-contact-intro > p {
+  font-size: 18px;
+  line-height: 1.85;
+  max-width: 460px;
+}
+.ltl-contact-note {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  color: var(--ltl-coral);
+  margin: 28px 0 36px;
+}
+.ltl-contact-note .ltl-hand {
+  font-size: 27px;
+  line-height: 1.35;
+  transform: rotate(-2deg);
+}
+.ltl-contact-note > span:last-child {
+  font-size: 48px;
+  animation: ltl-contact-heart 4s ease-in-out infinite;
+}
+.ltl-contact-details {
+  display: grid;
+  gap: 24px;
+  margin: 32px 0;
+}
+.ltl-contact-details > a,
+.ltl-contact-details > div {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  text-decoration: none;
+  color: var(--ltl-ink);
+  font-size: 16px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.ltl-contact-details small {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ltl-body);
+  margin-bottom: 3px;
+}
+.ltl-contact-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 15px;
+  background: #e0eeea;
+  color: var(--ltl-ink);
+  font-size: 24px;
+  transition: transform 0.25s;
+}
+.ltl-contact-icon svg {
+  width: 23px;
+  height: 23px;
+}
+.ltl-contact-details > a:hover .ltl-contact-icon {
+  transform: rotate(-8deg);
+}
+.ltl-contact-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ltl-ink);
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  padding: 15px 18px;
+  border-radius: 18px;
+  background: #e0eeea;
+  transition:
+    background 0.25s,
+    transform 0.25s;
+}
+.ltl-contact-whatsapp svg {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+.ltl-contact-whatsapp > span {
+  display: inline-block;
+  transition: transform 0.25s;
+}
+.ltl-contact-whatsapp:hover,
+.ltl-contact-whatsapp:focus-visible {
+  background: #d1e6df;
+  transform: translateY(-2px);
+}
+.ltl-contact-whatsapp:hover > span,
+.ltl-contact-whatsapp:focus-visible > span {
+  transform: translateX(5px);
+}
+.ltl-contact-paper-wrap {
+  min-width: 0;
+  padding-top: 20px;
+}
+.ltl-contact-paper {
+  position: relative;
+  padding: clamp(26px, 3.2vw, 48px);
+  border: 1px solid #eae5da;
+  border-radius: 12px 12px 34px 12px;
+  background: #fffefa;
+  box-shadow: 0 20px 60px #204f5e0b;
+}
+.ltl-contact-tape {
+  position: absolute;
+  width: 108px;
+  height: 29px;
+  background: #f4d18cbf;
+  top: -13px;
+  left: calc(50% - 54px);
+  transform: rotate(-6deg);
+}
+.ltl-contact-flower {
+  position: absolute;
+  right: 23px;
+  top: -24px;
+  color: var(--ltl-coral);
+  font-size: 64px;
+  line-height: 1;
+  animation: ltl-contact-flower 7s ease-in-out infinite;
+}
+.ltl-contact-paper-hello {
+  color: var(--ltl-coral);
+  font-size: 28px;
+  display: block;
+  margin-bottom: 12px;
+}
+.ltl-contact-paper h2 {
+  font:
+    800 clamp(27px, 3vw, 35px)/1.2 "Nunito",
+    sans-serif;
+  letter-spacing: -0.025em;
+  color: var(--ltl-ink);
+  margin: 0 0 12px;
+}
+.ltl-contact-paper > p {
+  line-height: 1.7;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+.ltl-contact form fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+.ltl-contact form label {
+  display: block;
+  color: var(--ltl-ink);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.ltl-contact form label[for="contact-number"] {
+  margin-bottom: 8px;
+}
+.ltl-contact form input,
+.ltl-contact form textarea {
+  width: 100%;
+  min-width: 0;
+  display: block;
+  border: 1px solid #dcded4;
+  border-radius: 12px;
+  padding: 14px 15px;
+  background: #fffcf5;
+  font:
+    400 16px/1.5 "DM Sans",
+    sans-serif;
+  color: var(--ltl-ink);
+  margin-top: 8px;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+.ltl-contact form input::placeholder,
+.ltl-contact form textarea::placeholder {
+  color: #6d7d81;
+  opacity: 1;
+}
+.ltl-contact form input:focus,
+.ltl-contact form textarea:focus {
+  outline: none;
+  border-color: var(--ltl-ink);
+  box-shadow: 0 0 0 3px #204f5e12;
+}
+.ltl-contact form textarea {
+  resize: vertical;
+  min-height: 145px;
+}
+.ltl-contact-name-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.ltl-contact .PhoneInput {
+  padding: 0 15px;
+  border: 1px solid #dcded4;
+  border-radius: 12px;
+  background: #fffcf5;
+  gap: 14px;
+  --PhoneInputCountryFlag-height: 20px;
+  --PhoneInputCountrySelectArrow-color: #204f5e;
+}
+.ltl-contact .PhoneInput:focus-within {
+  border-color: var(--ltl-ink);
+  box-shadow: 0 0 0 3px #204f5e12;
+}
+.ltl-contact .PhoneInputCountry {
+  margin-right: 0;
+  padding: 6px 8px 6px 0;
+  border-right: 1px solid #dcded4;
+}
+.ltl-contact .PhoneInputInput {
+  background: transparent;
+  border: 0;
+  margin-top: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+.ltl-contact .PhoneInputInput:focus {
+  box-shadow: none;
+}
+.ltl-contact-field-help {
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 20px;
+  color: var(--ltl-body);
+}
+.ltl-contact-send {
+  border: 0;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+  font:
+    700 16px "DM Sans",
+    sans-serif;
+}
+.ltl-contact-send span {
+  transition: transform 0.25s;
+}
+.ltl-contact-send:hover span,
+.ltl-contact-send:focus-visible span {
+  transform: translate(4px, -4px);
+}
+.ltl-contact fieldset:disabled {
+  opacity: 0.7;
+}
+.ltl-contact fieldset:disabled button {
+  cursor: wait;
+}
+.ltl-contact-status {
+  min-height: 24px;
+  margin: 16px 0 0;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.ltl-contact-status.is-success {
+  color: #22664c;
+}
+.ltl-contact-status.is-error {
+  color: #a43831;
+}
+.ltl-contact-paper-foot {
+  display: block;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 18px;
+}
+.ltl-contact-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+@keyframes ltl-contact-heart {
+  0%,
+  100% {
+    transform: rotate(-10deg) scale(1);
+  }
+  50% {
+    transform: rotate(5deg) scale(1.08);
+  }
+}
+@keyframes ltl-contact-flower {
+  0%,
+  100% {
+    transform: rotate(-12deg);
+  }
+  50% {
+    transform: rotate(20deg);
+  }
+}
+@media (max-width: 900px) {
+  .ltl-contact-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-top: 42px;
+    padding-bottom: 70px;
+  }
+  .ltl-contact-intro > p {
+    max-width: 600px;
+  }
+  .ltl-contact-paper-wrap {
+    max-width: 660px;
+    width: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .ltl-contact-name-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .ltl-contact-paper {
+    padding: 28px 20px;
+  }
+  .ltl-contact-whatsapp {
+    font-size: 14px;
+    gap: 9px;
+    padding: 14px;
+  }
+  .ltl-contact-note .ltl-hand {
+    font-size: 24px;
+  }
+}
+
+/* Contact page entrance animations */
+.ltl-contact-intro > .ltl-eyebrow,
+.ltl-contact-intro > h1,
+.ltl-contact-intro > p,
+.ltl-contact-note,
+.ltl-contact-details > *,
+.ltl-contact-whatsapp {
+  animation: ltl-contact-enter 700ms ease-out both;
+}
+
+.ltl-contact-intro > .ltl-eyebrow {
+  animation-delay: 80ms;
+}
+
+.ltl-contact-intro > h1 {
+  animation-delay: 160ms;
+}
+
+.ltl-contact-intro > p {
+  animation-delay: 240ms;
+}
+
+.ltl-contact-note {
+  animation-delay: 320ms;
+}
+
+.ltl-contact-details > :nth-child(1) {
+  animation-delay: 380ms;
+}
+
+.ltl-contact-details > :nth-child(2) {
+  animation-delay: 440ms;
+}
+
+.ltl-contact-details > :nth-child(3) {
+  animation-delay: 500ms;
+}
+
+.ltl-contact-whatsapp {
+  animation-delay: 560ms;
+}
+
+/* The paper gently settles into place */
+.ltl-contact-paper {
+  animation: ltl-contact-paper-enter 850ms
+    cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+}
+
+/* Form fields appear one after another */
+.ltl-contact-name-row,
+.ltl-contact .PhoneInput,
+.ltl-contact label[for="contact-email"],
+.ltl-contact label[for="contact-message"],
+.ltl-contact-send {
+  animation: ltl-contact-enter 600ms ease-out both;
+}
+
+.ltl-contact-name-row {
+  animation-delay: 320ms;
+}
+
+.ltl-contact .PhoneInput {
+  animation-delay: 400ms;
+}
+
+.ltl-contact label[for="contact-email"] {
+  animation-delay: 480ms;
+}
+
+.ltl-contact label[for="contact-message"] {
+  animation-delay: 560ms;
+}
+
+.ltl-contact-send {
+  animation-delay: 640ms;
+  transition: transform 250ms ease, box-shadow 250ms ease;
+}
+
+.ltl-contact-send:not(:disabled):hover,
+.ltl-contact-send:not(:disabled):focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px #204f5e24;
+}
+
+.ltl-contact-send:not(:disabled):active {
+  transform: translateY(0);
+}
+
+@keyframes ltl-contact-enter {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes ltl-contact-paper-enter {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+    rotate: 1.5deg;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+    rotate: 0deg;
+  }
+}

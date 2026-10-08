@@ -1,0 +1,4 @@
+.ltl-option-grid>.ltl-reveal{height:100%}
+.ltl-reveal{transition:opacity .75s ease var(--delay),translate .75s ease var(--delay)}
+.ltl-reveal-pending{opacity:0;translate:0 24px}
+.ltl-revealed{opacity:1;translate:0 0}

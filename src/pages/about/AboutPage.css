@@ -1,0 +1,72 @@
+.ltl-about-hero { display:grid; grid-template-columns:1.1fr 1fr; align-items:center; gap:90px; padding-block:75px 95px; }
+.ltl-about-hero h1 { font-size:clamp(2.8rem,4.8vw,4.5rem); }
+.ltl-about-hero h1 span { color:var(--ltl-coral); }
+.ltl-about-hero-copy>p { margin-top:28px; max-width:470px; font-size:1.1rem; }
+.ltl-about-hello { display:block; margin-top:24px; }
+.ltl-about-link { display:inline-flex; align-items:center; gap:12px; transition:color .25s,border-color .25s; }
+.ltl-about-link span { display:inline-block; margin-left:0; transition:transform .3s ease; }
+.ltl-about-link:hover, .ltl-about-link:focus-visible { color:var(--ltl-coral); }
+.ltl-about-link:hover span, .ltl-about-link:focus-visible span { transform:translateX(6px); }
+.ltl-about-hero-copy>.ltl-about-link { margin-top:28px; }
+.ltl-about-hero-copy>* { animation:ltl-enter .85s both; }
+.ltl-about-hero-copy h1 { animation-delay:.1s; }
+.ltl-about-hero-copy>p { animation-delay:.2s; }
+.ltl-about-hero-copy>.ltl-hand { animation-delay:.3s; }
+.ltl-about-hero-copy>.ltl-about-link { animation-delay:.4s; }
+.ltl-about-portrait-wrap { position:relative; min-width:0; padding:15px; animation:ltl-enter .95s .2s both; }
+.ltl-about-portrait { position:relative; padding:14px 14px 12px; background:white; margin:0; border:1px solid #204f5e10; box-shadow:0 15px 40px #204f5e10; transform:rotate(3deg); }
+.ltl-about-portrait img { width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center 25%; }
+.ltl-about-portrait figcaption { text-align:center; margin-top:12px; color:var(--ltl-ink); }
+.ltl-about-tape { position:absolute; top:-13px; left:calc(50% - 48px); width:96px; height:27px; background:#efd290c7; border-inline:2px dashed #fffcf5; transform:rotate(-6deg); }
+.ltl-about-portrait-star { position:absolute; top:-5px; left:-8px; font-size:4rem; line-height:1; color:var(--ltl-coral); animation:ltl-bob 7s ease-in-out infinite; }
+.ltl-about-heart { position:absolute; right:-5px; bottom:8px; font-family:'Patrick Hand'; font-size:4.5rem; color:var(--ltl-coral); transform:rotate(10deg); animation:ltl-bob 6s -2s ease-in-out infinite; }
+.ltl-about-ribbon { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:35px; padding:22px; background:#f5e9d1; color:var(--ltl-ink); font-family:'Patrick Hand'; font-size:1.5rem; }
+.ltl-about-ribbon>span:nth-child(even) { color:var(--ltl-coral); font-size:1.1rem; }
+.ltl-about-story { display:grid; grid-template-columns:.8fr 1.2fr; gap:90px; align-items:start; }
+.ltl-about-story-title>.ltl-hand { display:block; margin-top:25px; font-size:1.4rem; }
+.ltl-about-story-doodle { width:125px; height:95px; margin-top:22px; transform:rotate(-5deg); }
+.ltl-about-story-copy { display:grid; gap:26px; }
+.ltl-about-story-copy p { line-height:1.85; }
+.ltl-about-story-note { padding:26px; background:#f9e3dc; border-radius:24px; }
+.ltl-about-story-note>.ltl-hand { display:block; margin-bottom:12px; }
+.ltl-about-story-note strong { color:var(--ltl-ink); }
+.ltl-about-credentials { background:#eaf1eb; border-radius:65px 65px 0 0; padding-block:80px; }
+.ltl-about-credential-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+.ltl-about-credential-grid>.ltl-reveal { height:100%; }
+.ltl-about-credential-grid article { height:100%; display:flex; flex-direction:column; padding:28px; background:var(--ltl-cream); border-radius:24px; }
+.ltl-about-credential-icon { display:flex; align-items:center; justify-content:center; width:70px; height:70px; color:var(--ltl-ink); background:#f5e9d1; border-radius:22px; font-family:'Patrick Hand'; font-size:2.5rem; margin-bottom:22px; transform:rotate(-4deg); }
+.ltl-about-credential-icon svg { width:52px; height:52px; }
+.ltl-about-credential-grid>.ltl-reveal:nth-child(2) .ltl-about-credential-icon { background:#f9e3dc; }
+.ltl-about-credential-grid>.ltl-reveal:nth-child(3) .ltl-about-credential-icon { background:#e8e5f2; }
+.ltl-about-credential-grid h3 { font-size:1.35rem; line-height:1.3; }
+.ltl-about-credential-grid p { margin-top:14px; margin-bottom:22px; font-size:.95rem; }
+.ltl-about-credential-grid .ltl-hand { margin-top:auto; font-size:1.3rem; }
+.ltl-about-today { display:grid; grid-template-columns:1fr 1fr; align-items:center; gap:70px; }
+.ltl-about-today p { margin-top:22px; }
+.ltl-about-today .ltl-about-link { margin-top:28px; }
+.ltl-about-promise { position:relative; padding:40px 34px 65px; background:#f5e9d1; border:1px solid #204f5e0c; border-radius:12px; }
+.ltl-about-promise blockquote { font-family:Nunito; font-weight:800; font-size:clamp(1.9rem,2.7vw,2.5rem); color:var(--ltl-ink); line-height:1.25; letter-spacing:-.04em; margin:20px 0; }
+.ltl-about-promise blockquote span { color:var(--ltl-coral); }
+.ltl-about-promise-heart { position:absolute; bottom:6px; right:24px; font-family:'Patrick Hand'; font-size:3rem; color:var(--ltl-coral); }
+.ltl-about-last { padding-bottom:90px; }
+.ltl-about-cta { padding:65px 35px; border-radius:35px; background:#e1eeea; text-align:center; }
+.ltl-about-cta h2 { margin-top:16px; }
+.ltl-about-cta p { max-width:540px; margin:22px auto 0; }
+.ltl-about-cta .ltl-actions { justify-content:center; }
+@media(max-width:1000px) { .ltl-about-hero { gap:40px; } .ltl-about-story { gap:45px; } .ltl-about-today { gap:35px; } .ltl-about-credential-grid article { padding:24px; } }
+@media(max-width:760px) {
+ .ltl-about-hero { grid-template-columns:1fr; gap:40px; padding-block:45px 60px; }
+ .ltl-about-hero h1 { font-size:clamp(2.65rem,8.5vw,3.6rem); }
+ .ltl-about-portrait-wrap { width:min(420px,94%); margin:auto; }
+ .ltl-about-hero-copy>p { max-width:100%; }
+ .ltl-about-ribbon { gap:15px; font-size:1.2rem; }
+ .ltl-about-story { grid-template-columns:1fr; gap:30px; }
+ .ltl-about-story-doodle { display:none; }
+ .ltl-about-credentials { padding-block:60px; border-radius:40px 40px 0 0; }
+ .ltl-about-credential-grid { grid-template-columns:1fr; gap:16px; }
+ .ltl-about-today { grid-template-columns:1fr; gap:45px; }
+ .ltl-about-promise { padding:35px 28px 55px; }
+ .ltl-about-last { padding-bottom:65px; }
+ .ltl-about-cta { padding:48px 24px; border-radius:26px; }
+}
+@media(max-width:400px) { .ltl-about-ribbon { gap:12px; } .ltl-about-ribbon>span:nth-child(even) { font-size:.8rem; } .ltl-about-portrait-star { font-size:3rem; } .ltl-about-heart { font-size:3.5rem; } }
