@@ -1,3 +1,4 @@
+import SiteIcon from '../../components/SiteIcon';
 import learningSpace from "../../assets/image 28.webp";
 import gallery0 from "../../assets/image 30.webp";
 import gallery1 from "../../assets/image 31.webp";
@@ -104,10 +105,10 @@ function Actions() {
   return (
     <div className="ltl-actions">
       <a className="ltl-button" href="/enrol/">
-        Enrol now <span aria-hidden="true">↗</span>
+        Enrol now <span aria-hidden="true"><SiteIcon name="arrow-up-right" /></span>
       </a>
       <a className="ltl-text-link" href="/contact/">
-        Let’s have a chat <span aria-hidden="true">→</span>
+        Let’s have a chat <span aria-hidden="true"><SiteIcon name="arrow-right" /></span>
       </a>
     </div>
   );
@@ -133,13 +134,13 @@ export function HomePage() {
           </p>
           <Actions />
           <div className="ltl-hero-note">
-            <span aria-hidden="true">✦</span> A welcoming place to learn, right
+            <span aria-hidden="true"><SiteIcon name="spark" /></span> A welcoming place to learn, right
             here in Hillcrest.
           </div>
         </div>
         <div className="ltl-hero-art" aria-hidden="true">
-          <span className="ltl-doodle doodle-one">✳</span>
-          <span className="ltl-doodle doodle-two">✦</span>
+          <span className="ltl-doodle doodle-one"><SiteIcon name="flower" /></span>
+          <span className="ltl-doodle doodle-two"><SiteIcon name="spark" /></span>
           <div className="ltl-paper">
             <span className="ltl-hand">Hello, possibility!</span>
             <div className="ltl-book">
@@ -147,7 +148,7 @@ export function HomePage() {
                 Aa<span>every little step</span>
               </div>
               <div>
-                ♡<span>is a big deal.</span>
+                <SiteIcon name="heart" /><span>is a big deal.</span>
               </div>
             </div>
             <div className="ltl-pencil" />
@@ -169,9 +170,9 @@ export function HomePage() {
       </section>
       <div className="ltl-ribbon">
         <span>Little steps, big possibilities</span>
-        <span aria-hidden="true">✦</span>
+        <span aria-hidden="true"><SiteIcon name="spark" /></span>
         <span>Learning at your own pace</span>
-        <span aria-hidden="true">✦</span>
+        <span aria-hidden="true"><SiteIcon name="spark" /></span>
         <span>Practice makes progress</span>
       </div>
       <section id="learning-options" className="ltl-section ltl-wrap">
@@ -200,16 +201,16 @@ export function HomePage() {
                 <p>{option.copy}</p>
                 <span className="ltl-option-note">{option.note}</span>
                 <a href="/contact/">
-                  Let’s talk about it <span aria-hidden="true">↗</span>
+                  Let’s talk about it <span aria-hidden="true"><SiteIcon name="arrow-up-right" /></span>
                 </a>
               </article>
             </Reveal>
           ))}
         </div>
         <Reveal className="ltl-options-help">
-          <span className="ltl-options-help-spark" aria-hidden="true">✦</span>
+          <span className="ltl-options-help-spark" aria-hidden="true"><SiteIcon name="spark" /></span>
           <div><h3>Not sure which option fits your child?</h3><p>Let’s figure it out together.</p></div>
-          <a className="ltl-text-link ltl-chat-button" href="/contact/">Let’s have a chat <span aria-hidden="true">→</span></a>
+          <a className="ltl-text-link ltl-chat-button" href="/contact/">Let’s have a chat <span aria-hidden="true"><SiteIcon name="arrow-right" /></span></a>
         </Reveal>
       </section>
       <section className="ltl-subject-section" aria-labelledby="ltl-subject-heading">
@@ -310,7 +311,7 @@ export function HomePage() {
               ))}
             </ul>
             <a className="ltl-text-link" href="/about/">
-              Get to know LTL <span aria-hidden="true">→</span>
+              Get to know LTL <span aria-hidden="true"><SiteIcon name="arrow-right" /></span>
             </a>
           </Reveal>
         </div>
@@ -328,7 +329,7 @@ export function HomePage() {
         <Reveal className="ltl-review-stage">
           <div className={`ltl-review-panel ltl-review-tone-${review % 3}`}>
             <span className="ltl-review-tape" aria-hidden="true" />
-            <div className="ltl-review-topline"><span className="ltl-hand">A note from an LTL family</span><span className="ltl-review-flower" aria-hidden="true">✳</span></div>
+            <div className="ltl-review-topline"><span className="ltl-hand">A note from an LTL family</span><span className="ltl-review-flower" aria-hidden="true"><SiteIcon name="flower" /></span></div>
             <div className="ltl-review-content" key={review} aria-live="polite" aria-atomic="true">
               <span className="ltl-quote-mark" aria-hidden="true">“</span>
               <blockquote>{reviews[review].quote}</blockquote>
@@ -336,10 +337,10 @@ export function HomePage() {
               <span className="ltl-review-subject">{reviews[review].subject}</span>
             </div>
             <div className="ltl-review-controls">
-              <button type="button" onClick={() => setReview(current => (current + reviews.length - 1) % reviews.length)} aria-label="Previous testimonial"><span aria-hidden="true">←</span></button>
+              <button type="button" onClick={() => setReview(current => (current + reviews.length - 1) % reviews.length)} aria-label="Previous testimonial"><span aria-hidden="true"><SiteIcon name="arrow-left" /></span></button>
               <div className="ltl-review-dots" role="group" aria-label="Choose a testimonial">{reviews.map((item, index) => <button key={item.school} type="button" className={index === review ? "is-active" : ""} aria-label={`Show testimonial ${index + 1}, ${item.school}`} aria-pressed={index === review} onClick={() => setReview(index)}><span aria-hidden="true" /></button>)}</div>
               <span className="ltl-review-counter">{review + 1} / {reviews.length}</span>
-              <button type="button" onClick={() => setReview(current => (current + 1) % reviews.length)} aria-label="Next testimonial"><span aria-hidden="true">→</span></button>
+              <button type="button" onClick={() => setReview(current => (current + 1) % reviews.length)} aria-label="Next testimonial"><span aria-hidden="true"><SiteIcon name="arrow-right" /></span></button>
             </div>
           </div>
         </Reveal>
@@ -383,7 +384,7 @@ export function HomePage() {
           </p>
           <Actions />
           <span className="ltl-cta-star" aria-hidden="true">
-            ✳
+            <SiteIcon name="flower" />
           </span>
         </Reveal>
       </section>

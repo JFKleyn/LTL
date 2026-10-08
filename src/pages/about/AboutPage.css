@@ -70,3 +70,5 @@
  .ltl-about-cta { padding:48px 24px; border-radius:26px; }
 }
 @media(max-width:400px) { .ltl-about-ribbon { gap:12px; } .ltl-about-ribbon>span:nth-child(even) { font-size:.8rem; } .ltl-about-portrait-star { font-size:3rem; } .ltl-about-heart { font-size:3.5rem; } }
+
+.ltl-about-credential-icon .ltl-site-icon { width: 42px; height: 42px; }

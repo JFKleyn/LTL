@@ -1,3 +1,4 @@
+import SiteIcon from './SiteIcon';
 import { Link, NavLink } from "react-router-dom";
 import "./Header.css";
 import logo from "../assets/IMG_0222.webp";
@@ -75,7 +76,7 @@ export function Header() {
           <NavLink to="/about">About</NavLink>
           <NavLink to="/contact">Contact</NavLink>
           <Link className="ltl-button" to="/enrol">
-            Enrol now <span aria-hidden="true">↗</span>
+            Enrol now <span aria-hidden="true"><SiteIcon name="arrow-up-right" /></span>
           </Link>
         </nav>
       </div>

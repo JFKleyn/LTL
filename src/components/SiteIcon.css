@@ -1,0 +1,12 @@
+.ltl-site-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex: 0 0 auto;
+  vertical-align: -0.12em;
+  overflow: visible;
+  pointer-events: none;
+}
+/* Keep the illustrated book's heart aligned above its handwritten caption. */
+.ltl-book .ltl-site-icon { width: .65em; height: .65em; margin: .18em auto .12em; vertical-align: middle; }
+.ltl-contact-whatsapp .ltl-site-icon { width: 1.15em; height: 1.15em; }

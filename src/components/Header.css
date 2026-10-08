@@ -219,3 +219,5 @@
     width: 28px;
   }
 }
+
+.ltl-header .ltl-button > span { display: inline-flex; align-items: center; font-size: 1.4rem; }
