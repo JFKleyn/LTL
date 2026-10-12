@@ -307,7 +307,7 @@ export function EnrollPage() {
     <main className="ltl-enrol" id="main-content">
       <section className="ltl-wrap ltl-enrol-intro">
         <span className="ltl-eyebrow">
-          A little step towards big possibilities
+          A little step towards big potential
         </span>
         <h1>
           Let’s start your<br />

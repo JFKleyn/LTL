@@ -142,7 +142,7 @@ export function HomePage() {
           <span className="ltl-doodle doodle-one"><SiteIcon name="flower" /></span>
           <span className="ltl-doodle doodle-two"><SiteIcon name="spark" /></span>
           <div className="ltl-paper">
-            <span className="ltl-hand">Hello, possibility!</span>
+            <span className="ltl-hand">Hello, potential!</span>
             <div className="ltl-book">
               <div>
                 Aa<span>every little step</span>
@@ -151,11 +151,11 @@ export function HomePage() {
                 <SiteIcon name="heart" /><span>is a big deal.</span>
               </div>
             </div>
-            <div className="ltl-pencil" />
             <span className="ltl-paper-caption">
               Let’s grow a love for learning.
             </span>
           </div>
+          <div className="ltl-pencil" />
           <span className="ltl-sticker">
             Practice makes
             <br />
@@ -169,7 +169,7 @@ export function HomePage() {
         </div>
       </section>
       <div className="ltl-ribbon">
-        <span>Little steps, big possibilities</span>
+        <span>Little steps, big potential</span>
         <span aria-hidden="true"><SiteIcon name="spark" /></span>
         <span>Learning at your own pace</span>
         <span aria-hidden="true"><SiteIcon name="spark" /></span>
@@ -322,7 +322,7 @@ export function HomePage() {
           <h2 id="ltl-family-words">Little wins.<br /><span>Lovely words.</span></h2>
           <p>Growing confidence, happy discoveries and little moments that mean a lot. Here’s what our families have shared.</p>
           <div className="ltl-review-doodle" aria-hidden="true">
-            <svg viewBox="0 0 190 105" fill="none"><path d="M18 62C8 43 24 26 39 40 51 21 75 34 63 53L38 79Z" fill="#f9e3dc" stroke="#cf584b" strokeWidth="2.5"/><path d="M80 64c24 18 60 7 77-17m-3-9 8 9-11 6" stroke="#204f5e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/><path d="m106 19 3-8 3 8 8 3-8 3-3 8-3-8-8-3Z" fill="#e7ae7f"/></svg>
+            <svg viewBox="0 0 190 105" fill="none"><circle cx="44" cy="49" r="31" fill="#f9e3dc" stroke="#cf584b" strokeWidth="2.5"/><path d="M32 43h.1M56 43h.1" stroke="#204f5e" strokeWidth="5" strokeLinecap="round"/><path d="M30 55c7 12 21 12 28 0" stroke="#204f5e" strokeWidth="2.8" strokeLinecap="round" fill="none"/><path d="M90 64c21 15 47 11 65-9m-12 1 12-1-1 12" stroke="#204f5e" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/><path d="m112 21 3-8 3 8 8 3-8 3-3 8-3-8-8-3Z" fill="#e7ae7f"/></svg>
             <span className="ltl-hand">Notes that make us smile.</span>
           </div>
         </Reveal>

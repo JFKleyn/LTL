@@ -1090,3 +1090,19 @@ button:focus-visible {
 .ltl-cta .ltl-text-link:focus-visible { color: var(--ltl-coral); border-color: var(--ltl-ink); }
 .ltl-cta .ltl-text-link:hover span,
 .ltl-cta .ltl-text-link:focus-visible span { transform: translateX(7px); }
+
+/* Hero pencil: sibling of the paper, anchored to the hero art rather than
+   the transformed paper. Its tip meets the top of the circular sticker. */
+.ltl-hero-art > .ltl-pencil {
+  right: 10px;
+  bottom: 150px;
+  z-index: 3;
+  pointer-events: none;
+}
+.ltl-hero-art > .ltl-sticker { z-index: 2; }
+@media (max-width: 1000px) {
+  .ltl-hero-art > .ltl-pencil { right: 31px; bottom: 149px; }
+}
+@media (max-width: 480px) {
+  .ltl-hero-art > .ltl-pencil { right: 31px; bottom: 116px; }
+}
