@@ -120,12 +120,12 @@ export function HomePage() {
       <section className="ltl-hero ltl-wrap">
         <div className="ltl-hero-copy">
           <span className="ltl-eyebrow">
-            A little support. A world of possibility.
+            A little support. A world of potential.
           </span>
           <h1>
-            Shaping little minds,
+            Shaping little 
             <br />
-            growing <span className="ltl-hero-highlight">big hearts.<svg className="ltl-hero-underline" viewBox="0 0 320 22" fill="none" aria-hidden="true"><path d="M5 13C75 2 185 3 315 10M28 20C100 10 225 10 294 16" /></svg></span>
+            minds, growing <span className="ltl-hero-highlight">big hearts.<svg className="ltl-hero-underline" viewBox="0 0 320 22" fill="none" aria-hidden="true"><path d="M5 13C75 2 185 3 315 10M28 20C100 10 225 10 294 16" /></svg></span>
           </h1>
           <p>
             At LTL, we turn everyday moments into learning opportunities to grow
