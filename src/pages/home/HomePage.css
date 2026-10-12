@@ -667,7 +667,7 @@ button:focus-visible {
     padding: 22px 20px;
   }
   .ltl-ribbon > span:first-child,
-  .ltl-ribbon > span:nth-child(2) {
+  .ltl-ribbon > span:nth-child(5) {
     display: none;
   }
   .ltl-section {
