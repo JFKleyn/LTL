@@ -4,7 +4,7 @@ import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input";
 import flags from "react-phone-number-input/flags";
 import "react-phone-number-input/style.css";
 import Reveal from "../../components/Reveal";
-import "../Home/HomePage.css";
+import "../home/HomePage.css";
 import "./ContactPage.css";
 
 export function ContactPage() {

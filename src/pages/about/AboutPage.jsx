@@ -1,7 +1,7 @@
 import SiteIcon from "../../components/SiteIcon";
 import ownerPhoto from "../../assets/aboutimg.webp";
 import Reveal from "../../components/Reveal";
-import "../Home/HomePage.css";
+import "../home/HomePage.css";
 import "./AboutPage.css";
 
 export function AboutPage() {

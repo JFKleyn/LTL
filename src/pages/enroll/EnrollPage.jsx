@@ -6,7 +6,7 @@ import flags from "react-phone-number-input/flags";
 import "react-phone-number-input/style.css";
 import logo from "../../assets/IMG_0222.webp";
 import Reveal from "../../components/Reveal";
-import "../Home/HomePage.css";
+import "../home/HomePage.css";
 import "./EnrollPage.css";
 
 const weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
