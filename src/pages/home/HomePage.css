@@ -1106,3 +1106,43 @@ button:focus-visible {
 @media (max-width: 480px) {
   .ltl-hero-art > .ltl-pencil { right: 31px; bottom: 116px; }
 }
+
+
+/* Mobile hero: keep the notebook caption clear of the sticker and pencil. */
+@media (max-width: 480px) {
+  .ltl-hero-art {
+    height: 365px;
+    padding-bottom: 16px;
+  }
+  .ltl-hero-art .ltl-paper {
+    width: 91%;
+    padding: 24px 18px 38px;
+  }
+  .ltl-hero-art .ltl-paper-caption {
+    display: block;
+    position: relative;
+    z-index: 1;
+    max-width: 76%;
+    margin: 0 auto 0 4px;
+    font-size: 1rem;
+    line-height: 1.15;
+    text-align: center;
+  }
+  .ltl-hero-art > .ltl-sticker {
+    width: 96px;
+    height: 96px;
+    right: -5px;
+    bottom: -12px;
+    font-size: .95rem;
+  }
+  .ltl-hero-art > .ltl-sticker strong { font-size: 1.3rem; }
+  .ltl-hero-art > .ltl-pencil {
+    right: 23px;
+    bottom: 84px;
+    height: 155px;
+  }
+  .ltl-hero-art > .ltl-art-note {
+    left: 8px;
+    bottom: -32px;
+  }
+}

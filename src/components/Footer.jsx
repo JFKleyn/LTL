@@ -1,4 +1,5 @@
 import SiteIcon from "./SiteIcon";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 import logo from "../assets/IMG_0222.webp";
 
@@ -40,9 +41,9 @@ export function Footer() {
       </div>
       <div className="ltl-wrap ltl-footer-grid">
         <div className="ltl-footer-brand">
-          <a href="/" className="ltl-brand" aria-label="Love to Learn home">
+          <Link to="/" className="ltl-brand" aria-label="Love to Learn home">
             <img src={logo} alt="Love to Learn" />
-          </a>
+          </Link>
           <p>
             Shaping little minds,
             <br />
@@ -100,30 +101,30 @@ export function Footer() {
         </div>
         <nav className="ltl-footer-links" aria-label="Footer navigation">
           <h3>Come on in</h3>
-          <a href="/#learning-options">
+          <Link to="/#learning-options">
             Learning options{" "}
             <span aria-hidden="true">
               <SiteIcon name="arrow-right" />
             </span>
-          </a>
-          <a href="/about/">
+          </Link>
+          <Link to="/about/">
             About LTL{" "}
             <span aria-hidden="true">
               <SiteIcon name="arrow-right" />
             </span>
-          </a>
-          <a href="/contact/">
+          </Link>
+          <Link to="/contact/">
             Get in touch{" "}
             <span aria-hidden="true">
               <SiteIcon name="arrow-right" />
             </span>
-          </a>
-          <a href="/enrol/">
+          </Link>
+          <Link to="/enrol/">
             Enrol your child{" "}
             <span aria-hidden="true">
               <SiteIcon name="arrow-right" />
             </span>
-          </a>
+          </Link>
         </nav>
         <div className="ltl-footer-contact">
           <h3>Let’s talk learning</h3>
@@ -178,9 +179,9 @@ export function Footer() {
         </div>
       </div>
       <div className="ltl-wrap ltl-copyright">
-        <span>
-          © {new Date().getFullYear()} LTL Private Tutoring. All rights
-          reserved.
+        <span className="ltl-footer-legal">
+          <span>© {new Date().getFullYear()} LTL Private Tutoring. All rights reserved.</span>
+          <Link to="/privacy-policy/" className="ltl-footer-privacy-link">Privacy Policy</Link>
         </span>
         <span className="ltl-footer-signoff">
           Made for little minds and big potential.{" "}

@@ -7,6 +7,7 @@ import { AboutPage } from "./pages/about/AboutPage";
 import { ContactPage } from "./pages/contact/ContactPage";
 import { EnrollPage } from "./pages/enroll/EnrollPage";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { PrivacyPolicyPage } from "./pages/privacy/PrivacyPolicyPage";
 import { NotFoundPage } from "./pages/not-found/NotFoundPage";
 
 const SITE_URL = "https://ltlprivatetutoring.co.za";
@@ -23,6 +24,10 @@ const seoByPath = {
   "/contact": {
     title: "Contact Love to Learn | Hillcrest & Durban",
     description: "Get in touch with Love to Learn to enquire about private tutoring and educational support in Hillcrest, Durban and surrounding areas.",
+  },
+  "/privacy-policy": {
+    title: "Privacy Policy | Love to Learn",
+    description: "Read how Love to Learn Private Tutoring handles personal information submitted through our website.",
   },
   "/enrol": {
     title: "Enrol at Love to Learn | Private Tutoring in Durban",
@@ -86,6 +91,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/enrol" element={<EnrollPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
