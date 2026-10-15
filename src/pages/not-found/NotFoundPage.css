@@ -1,0 +1,17 @@
+.ltl-not-found{position:relative;isolation:isolate;overflow:hidden;min-height:70vh;display:grid;place-items:center;padding:110px 24px 120px;background:#fffdf7;text-align:center;color:#263a30}
+.ltl-not-found__content{position:relative;z-index:1;max-width:680px}
+.ltl-not-found__eyebrow{font-size:12px;font-weight:800;letter-spacing:.2em;color:#65866e}
+.ltl-not-found__number{margin:10px 0 0;font-size:clamp(110px,22vw,220px);line-height:1;font-weight:900;letter-spacing:-.09em;color:#2c6b50}
+.ltl-not-found__number span{color:#f5b64c}
+.ltl-not-found h1{margin:12px 0 16px;font-size:clamp(28px,5vw,48px);line-height:1.15;letter-spacing:-.035em}
+.ltl-not-found__description{max-width:480px;margin:0 auto 32px;font-size:clamp(15px,2vw,18px);line-height:1.7;color:#657168}
+.ltl-not-found__button{display:inline-flex;align-items:center;justify-content:center;gap:13px;padding:16px 24px;border-radius:100px;background:#2c6b50;color:#fff;text-decoration:none;font-size:15px;font-weight:750;transition:transform .25s ease,box-shadow .25s ease,background .25s ease}
+.ltl-not-found__button:hover{transform:translateY(-4px);box-shadow:0 12px 25px #2c6b5033;background:#20543d}
+.ltl-not-found__button svg{transition:transform .25s ease}
+.ltl-not-found__button:hover svg{transform:translateX(4px)}
+.ltl-not-found__glow{position:absolute;width:min(70vw,640px);aspect-ratio:1;border-radius:50%;background:#eaf5e7;filter:blur(65px);opacity:.65;z-index:-1}
+.ltl-not-found__decoration{position:absolute;font-size:clamp(35px,7vw,90px);color:#f5b64c;opacity:.65;animation:ltl404float 5s ease-in-out infinite}
+.ltl-not-found__decoration--one{top:18%;left:13%}
+.ltl-not-found__decoration--two{right:12%;bottom:18%;color:#83ad8c;animation-delay:-2.5s}
+@keyframes ltl404float{0%,100%{transform:translateY(0) rotate(-10deg)}50%{transform:translateY(-18px) rotate(12deg)}}
+@media(max-width:600px){.ltl-not-found{min-height:65vh;padding:85px 20px 100px}.ltl-not-found__decoration--one{left:5%;top:12%}.ltl-not-found__decoration--two{right:5%;bottom:12%}}
